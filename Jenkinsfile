@@ -1,4 +1,5 @@
 pipeline {
+    tool name: 'terraform_1', type: 'terraform'
     agent any
 
     stages {
