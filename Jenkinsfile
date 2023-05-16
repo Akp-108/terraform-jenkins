@@ -1,6 +1,6 @@
 pipeline {
     tools{
-        terraform_1
+        terraform 'terraform_1'
     }
     agent any
 
