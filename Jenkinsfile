@@ -1,6 +1,6 @@
 pipeline {
     tools{
-        name: 'terraform_1', type: 'terraform'
+        terraform_1
     }
     agent any
 
