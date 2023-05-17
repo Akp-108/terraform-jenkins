@@ -1,25 +1,31 @@
 pipeline {
-    tools{
-        terraform 'terraform_1'
-    }
     agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-               git branch: 'main', url: 'https://github.com/raavimanikanta/terraform-jenkins'
-            }
-        }
-        stage('Terraform init') {
-            steps {
-               sh 'terraform init'
-            }
-        }
-        stage('Terraform plan') {
-            steps {
-                sh 'terraform plan'
-            }
-        }
-        
+    tools {
+       terraform 'terraform'
     }
+    stages {
+        stage('Git checkout') {
+           steps{
+                git branch: 'main', credentialsId: 'Github', url: 'https://github.com/raavimanikanta/terraform-jenkins.git'
+            }
+        }
+        stage('terraform format check') {
+            steps{
+                sh 'terraform fmt'
+            }
+        }
+        stage('terraform Init') {
+            steps{
+                sh 'terraform init'
+            }
+        }
+        stage('terraform apply') {
+            steps{
+                sh 'terraform apply --auto-approve'
+            }
+        }
+    }
+
+    
 }
+
