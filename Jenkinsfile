@@ -11,17 +11,17 @@ pipeline {
         }
         stage('terraform init') {
             steps{
-                 bat 'start /B terraform init'
+                 bat 'dir /B terraform init'
             }
         }
         stage('terraform plan') {
             steps{
-                bat 'start /B terraform plan'
+                bat 'dir /B terraform plan'
             }
         }
         stage('terraform apply') {
             steps{
-                 bat 'start /B terraform apply -auto-approve'
+                 bat 'dir /B terraform apply -auto-approve'
             }
         }
     }
