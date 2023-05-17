@@ -9,21 +9,21 @@ pipeline {
                 git branch: 'main', credentialsId: 'Github', url: 'https://github.com/raavimanikanta/terraform-jenkins.git'
             }
         }
-        stage('terraform format check') {
+        stage('terraform init') {
             steps{
-                sh 'terraform fmt'
+                 bat 'start /B terraform init'
             }
         }
-        stage('terraform Init') {
+        stage('terraform plan') {
             steps{
-                sh 'terraform init'
+                bat 'start /B terraform plan'
             }
         }
-        stage('terraform apply') {
-            steps{
-                sh 'terraform apply --auto-approve'
-            }
-        }
+//         stage('terraform apply') {
+//             steps{
+//                 sh 'terraform apply --auto-approve'
+//             }
+//         }
     }
 
     
