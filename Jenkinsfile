@@ -52,7 +52,7 @@ pipeline {
         
         stage('Apply') {
             steps {
-                bat 'terraform apply'
+                bat 'terraform apply -auto-approve'
             }
         }
         
