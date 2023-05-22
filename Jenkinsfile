@@ -117,48 +117,48 @@
 //   }
 // }
 
-pipeline {
-    agent any
-//     tools {
-//         terraform 'terraform-11'
-//     }
-     environment {
-    AWS_REGION = 'us-west-1'
-    AWS_ACCESS_KEY_ID = credentials('aws-demo-credentials')
-    AWS_SECRET_ACCESS_KEY = credentials('aws-demo-credentials')
-     
-  }
+// pipeline {
+//     agent any
+// //     tools {
+// //         terraform 'terraform-11'
+// //     }
+//      environment {
+//     AWS_REGION = 'us-west-1'
+//     AWS_ACCESS_KEY_ID = credentials('aws-demo-credentials')
+//     AWS_SECRET_ACCESS_KEY = credentials('aws-demo-credentials')
+//      sessionTokenVariable: 'AWS_SESSION_TOKEN', 
+//   }
     
-    stages{
-        stage('Git Checkout'){
-             steps {
-        // Checkout your source code from version control system (e.g., Git)
-        // For example:
-        // git 'https://github.com/your-repo.git'
-        git branch: 'main', url: 'https://github.com/raavimanikanta/terraform-jenkins.git'
-      }
-        }
+//     stages{
+//         stage('Git Checkout'){
+//              steps {
+//         // Checkout your source code from version control system (e.g., Git)
+//         // For example:
+//         // git 'https://github.com/your-repo.git'
+//         git branch: 'main', url: 'https://github.com/raavimanikanta/terraform-jenkins.git'
+//       }
+//         }
        
-        stage('Terraform init'){
-            steps{
-                bat 'terraform init'
-            }
-        }
+//         stage('Terraform init'){
+//             steps{
+//                 bat 'terraform init'
+//             }
+//         }
         
-         stage('Terraform plan'){
-            steps{
-                bat 'terraform plan'
-            }
-        }
-        stage('Terraform Apply'){
-            steps{
+//          stage('Terraform plan'){
+//             steps{
+//                 bat 'terraform plan'
+//             }
+//         }
+//         stage('Terraform Apply'){
+//             steps{
                 
-                bat 'terraform apply -auto-approve'
+//                 bat 'terraform apply -auto-approve'
                 
-            }
-        }
-    }
-}
+//             }
+//         }
+//     }
+// }
 
 
 pipeline {
