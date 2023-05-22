@@ -33,7 +33,7 @@ pipeline {
     agent any
     
      environment {
-    AWS_REGION = 'us-west-2'
+    AWS_REGION = 'us-east-1'
   }
     
     stages {
@@ -44,19 +44,34 @@ pipeline {
         }
         stage('Initialize') {
             steps {
+                withCredentials([
+                awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
+                awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]){
                 bat 'terraform init'
+                }
             }
         }
         
         stage('Plan') {
             steps {
+                withCredentials([
+                awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
+                awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]){
                 bat 'terraform plan'
+                }
             }
         }
         
         stage('Apply') {
             steps {
+                withCredentials([
+                awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
+                awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]){
                 bat 'terraform apply -auto-approve'
+                }
             }
         }
         
