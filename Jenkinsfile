@@ -45,16 +45,19 @@ pipeline {
             }
         }
           stage('Initialize') {
+              steps{
               bat 'terraform init'
                 }
         }
         
           stage('Plan') {
+              steps{
                bat 'terraform plan'
                 }
         }
         
         stage('Apply') {
+            steps{
                bat 'terraform apply -auto-approve'
             }
         }
