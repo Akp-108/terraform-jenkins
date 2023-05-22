@@ -122,6 +122,12 @@ pipeline {
 //     tools {
 //         terraform 'terraform-11'
 //     }
+     environment {
+    AWS_REGION = 'us-west-1'
+    AWS_ACCESS_KEY_ID = credentials('aws-demo-credentials')
+    AWS_SECRET_ACCESS_KEY = credentials('aws-demo-credentials')
+     
+  }
     
     stages{
         stage('Git Checkout'){
@@ -146,13 +152,9 @@ pipeline {
         }
         stage('Terraform Apply'){
             steps{
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: "aws-demo-credentials",
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                
                 bat 'terraform apply -auto-approve'
-                }
+                
             }
         }
     }
