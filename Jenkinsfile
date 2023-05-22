@@ -117,7 +117,7 @@
 //   }
 // }
 
-pipeline
+pipeline {
     agent any
 //     tools {
 //         terraform 'terraform-11'
