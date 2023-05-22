@@ -42,34 +42,31 @@ pipeline {
                 git branch: 'main', credentialsId: 'Github', url: 'https://github.com/raavimanikanta/terraform-jenkins.git'
             }
         }
-        stage('Initialize') {
+          stage('Initialize') {
             steps {
-                withCredentials([
-                awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
-                awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
-                ]){
+                withAWS(credentials: 'aws-demo-credentials', region: 'us-east-1') {
+//                 awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
+//                 awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
                 bat 'terraform init'
                 }
             }
         }
         
-        stage('Plan') {
+         stage('Plan') {
             steps {
-                withCredentials([
-                awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
-                awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
-                ]){
+               withAWS(credentials: 'aws-demo-credentials', region: 'us-east-1') {
+//                 awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
+//                 awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
                 bat 'terraform plan'
                 }
             }
         }
         
         stage('Apply') {
-            steps {
-                withCredentials([
-                awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
-                awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
-                ]){
+            steps{
+            withAWS(credentials: 'aws-demo-credentials', region: 'us-east-1') {
+//                 awsAccessKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_ACCESS_KEY_ID'),
+//                 awsSecretKey(credentialsId: 'aws-demo-credentials', variable: 'AWS_SECRET_ACCESS_KEY')
                 bat 'terraform apply -auto-approve'
                 }
             }
