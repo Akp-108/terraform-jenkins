@@ -12,7 +12,7 @@ environment {
         }
           stage('Initialize') {
               steps{
-              bat 'terraform init'
+              bat 'terraform init -reconfigure -backend-config="access_key=AKIAZ3CUIHQKPMVTXQ5Y" -backend-config="secret_key=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"'
                 }
         }
         
